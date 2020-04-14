@@ -1,9 +1,11 @@
 const express = require("express");
 
-
+const blogsRouter = require("../data/routers/blogs-router");
+const commentRouter = require("../data/routers/commentRouter")
 
 const server = express()
-
+server.use("/api/posts", blogsRouter)
+server.use("/api/comments", commentRouter)
 
 server.use(express.json())
 

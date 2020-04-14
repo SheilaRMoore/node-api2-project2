@@ -5,7 +5,7 @@ const router = express.Router()
 const commentsDB = require("../db");
 
 //get commments
-router.get("/", (req,res) => {
+router.get("/", (req, res) => {
     commentsDB
     .findPostComments()
     .then(comments => {
