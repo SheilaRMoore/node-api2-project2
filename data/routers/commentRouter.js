@@ -5,9 +5,10 @@ const router = express.Router()
 const commentsDB = require("../db");
 
 //get commments
-router.get("/", (req, res) => {
+router.get("/:id/comments", (req, res) => {
+    const { id } = req.params;
     commentsDB
-    .findPostComments()
+    .findPostComments(id)
     .then(comments => {
         res.status(200).json(comments)
     })
@@ -31,6 +32,31 @@ router.get("/:id", (req,res) => {
         `})
     })
 })
+
+router.post("/:id/comments", (req,res)=> {
+const {id} = req.params;
+const newComment = req.body;
+const commentReady ={
+    post_id: id,
+    ...newComment
+
+}
+console.log(commentReady)
+commentsDB
+.insertComment(commentReady)
+.then (commentReady=> {
+    res.status(200).json(commentReady)
+})
+.catch(error => {
+    res.status(500).json({errorMessage: `${error}
+   could not add comment
+    `})
+})
+})
+
+
+
+module.exports = router
 
 
 

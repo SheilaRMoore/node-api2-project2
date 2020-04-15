@@ -31,6 +31,7 @@ router.get("/:id", (req, res) => {
 //new posts
 router.post("/", (req,res) => {
     const newPost = req.body;
+    console.log(newPost)
     dataBase
     .insert(newPost)
     .then(newPost => {
